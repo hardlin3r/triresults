@@ -42,7 +42,7 @@ class Address
     when (Address) then
       { city: object.city, state: object.state, loc: Point.mongoize(object.location) }
     end
- end
+  end
 
 
 end
