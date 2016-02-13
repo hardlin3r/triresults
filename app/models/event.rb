@@ -8,6 +8,8 @@ class Event
   field :d, as: :distance, type: Float
   field :u, as: :units, type: String
 
+  validates :order, :name, presence: true
+
   def meters
     case u
     when "miles" then
