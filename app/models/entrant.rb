@@ -2,6 +2,8 @@ class Entrant
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  embeds_many :results, class_name: 'LegResult'
+
   store_in collection: "results"
 
   field :bib, type: Integer

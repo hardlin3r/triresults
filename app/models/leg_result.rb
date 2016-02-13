@@ -1,5 +1,8 @@
 class LegResult
   include Mongoid::Document
+
+  embedded_in :entrant
+
   field :secs, type: Float
 
   after_initialize do |doc|
