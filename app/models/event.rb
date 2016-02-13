@@ -1,5 +1,8 @@
 class Event
   include Mongoid::Document
+
+  embedded_in :parent, polymorphic: true, touch: true
+
   field :o, as: :order, type: Integer
   field :n, as: :name, type: String
   field :d, as: :distance, type: Float
@@ -33,5 +36,5 @@ class Event
     else
       nil
     end
- end
+  end
 end
