@@ -1,5 +1,6 @@
 class RacerInfo
   include Mongoid::Document
+  embedded_in :parent, polymorphic: true
   field :racer_id, as: :_id
   field :_id, default: ->{ racer_id }
   field :fn, as: :first_name , type: String
