@@ -11,6 +11,7 @@ class Race
   field :n, as: :name, type: String
   field :date, as: :date, type: Date
   field :loc, as: :location, type: Address
+  field :next_bib, type: Integer, default: ->{ 0 }
 
   DEFAULT_EVENTS = {"swim" => {:order => 0, :name => "swim", :distance => 1.0, :units => "miles"},
                     "t1" => {:order => 1, :name => "t1"},
@@ -51,4 +52,21 @@ class Race
       self.location = object
     end
   end
+
+  def next_bib
+    self.inc(:next_bib => 1)
+    self[:next_bib]
+  end
+
+  def get_group(racer)
+    if racer && racer.birth_year && racer.gender
+      quotient = (date.year - racer.birth_year) / 10
+      min_age = quotient * 10
+      max_age = ((quotient + 1) * 10) - 1
+      gender = racer.gender
+      name = min_age >= 60 ? "masters #{gender}" : "#{min_age} to #{max_age} (#{gender})"
+      Placing.demongoize(:name => name)
+    end
+  end
+
 end
