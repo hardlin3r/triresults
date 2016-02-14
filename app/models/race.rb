@@ -83,4 +83,9 @@ class Race
     end
     entrant
   end
+  def self.upcoming_available_to(racer)
+    upcoming_race_ids = racer.races.upcoming.pluck(:race).map { |r| r[:_id] }
+    all_race_ids = Race.upcoming.map{ |r| r[:_id] }
+    Race.where(:_id => { :$in => all_race_ids - upcoming_race_ids})
+  end
 end
