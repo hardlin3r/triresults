@@ -14,6 +14,9 @@ class Entrant
   field :gender, type: Placing
   field :group, type: Placing
 
+  scope :upcoming, ->{ where(:"race.date".gte => Date.current) }
+  scope :past, ->{ where(:"race.date".lt => Date.current) }
+
   delegate :first_name, :first_name=, to: :racer
   delegate :last_name, :last_name=, to: :racer
   delegate :gender, :gender=, to: :racer, prefix: "racer"
