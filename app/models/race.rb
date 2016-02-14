@@ -68,5 +68,19 @@ class Race
       Placing.demongoize(:name => name)
     end
   end
-
+  def create_entrant(racer)
+    entrant = Entrant.new
+    entrant.race = attributes.symbolize_keys.slice(:_id, :n, :date)
+    entrant.racer = racer.info.attributes
+    entrant.group = get_group(racer)
+    events.each do |event|
+      entrant.send("#{event.name}=", event)
+    end
+    entrant.validate
+    if entrant.valid?
+      entrant.bib = next_bib
+      entrant.save
+    end
+    entrant
+  end
 end
