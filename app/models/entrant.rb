@@ -3,6 +3,7 @@ class Entrant
   include Mongoid::Timestamps
 
   embeds_many :results, class_name: 'LegResult', order: [:"event.o".asc], after_add: :update_total
+  embeds_one :race, class_name: 'RaceRef'
 
   store_in collection: "results"
 
