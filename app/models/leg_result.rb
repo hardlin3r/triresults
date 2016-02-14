@@ -17,7 +17,7 @@ class LegResult
 
   def secs=(value)
     self[:secs] = value
-    calc_ave
+    self.calc_ave
   end
 
 end
