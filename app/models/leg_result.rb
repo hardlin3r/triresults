@@ -2,8 +2,11 @@ class LegResult
   include Mongoid::Document
 
   embedded_in :entrant
+  embeds_one :event, as: :parent
 
   field :secs, type: Float
+
+  validates :event, presence: true
 
   after_initialize do |doc|
     calc_ave

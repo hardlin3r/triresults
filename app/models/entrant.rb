@@ -2,7 +2,7 @@ class Entrant
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  embeds_many :results, class_name: 'LegResult'
+  embeds_many :results, class_name: 'LegResult', order: [:"event.o".asc]
 
   store_in collection: "results"
 
