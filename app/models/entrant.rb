@@ -17,4 +17,7 @@ class Entrant
     self.secs = 0.0 if self.secs.nil?
     self.secs += result[:secs]
   end
+  def the_race
+    self.race.race
+  end
 end
